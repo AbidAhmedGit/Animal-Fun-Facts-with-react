@@ -1,1 +1,1 @@
-import { animals } from 'animals';
+import { animals } from './animals';
