@@ -35,10 +35,51 @@
     function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
     var title = "";
+
+    var background = _react2.default.createElement('img', {
+      className: 'background',
+      alt: 'ocean',
+      src: '/images/ocean.jpg'
+    });
+
+    var images = [];
+    for (var animal in _animals.animals) {
+      images.push(_react2.default.createElement('img', {
+        key: animal,
+        className: 'animal',
+        alt: animal,
+        src: _animals.animals[animal].image,
+        ariaLabel: animal,
+        role: 'button',
+        onClick: displayFact
+      }));
+    }
+
+    function displayFact(e) {
+      var selectedAnimal = e.target.alt;
+      var animalInfo = _animals.animals[selectedAnimal];
+      var optionIndex = Math.floor(Math.random() * animalInfo.facts.length);
+
+      var funFact = animalInfo.facts[optionIndex];
+      document.getElementById("fact").innerHTML = funFact;
+    }
+
     var animalFacts = _react2.default.createElement(
-      'h1',
+      'div',
       null,
-      title == "" ? "Click an animal for a fun fact!" : title
+      _react2.default.createElement(
+        'h1',
+        null,
+        title == "" ? "Click an animal for a fun fact!" : title
+      ),
+      ';',
+      background,
+      _react2.default.createElement('p', { id: 'fact' }),
+      _react2.default.createElement(
+        'div',
+        { className: 'animals' },
+        images
+      )
     );
 
     _reactDom2.default.render(animalFacts, document.getElementById("root"));
